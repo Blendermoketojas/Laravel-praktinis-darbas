@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Sales;
+use App\Models\Vietos;
 
-
-class KlaipedaA1Controller extends Controller
+class VietosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,8 @@ class KlaipedaA1Controller extends Controller
      */
     public function index()
     {
-        $kedes = DB::table('_klaipeda_a1')->get();
-        $selectedId = "5";
-        return view('filmosale')->with('kedes', $kedes)->with('selectedId', $selectedId);
+        $vietos=Vietos::all();
+        return view('FilmoSale',compact('vietos'));
     }
 
     /**
@@ -38,20 +37,7 @@ class KlaipedaA1Controller extends Controller
      */
     public function store(Request $request)
     {
-        $selectedId = $request->input('selectedId');
-
-        DB::table('_klaipeda_a1')
-            ->where('id', $selectedId)
-            ->update(['uzimta' => 1]);
-    
-        $name = $request->input('name');
-        $lName = $request->input('lName');
-    
-        DB::table('_klaipeda_a1')
-            ->where('id', $selectedId)
-            ->update(['Vardas' => $name, 'Pavarde' => $lName]);
-    
-        return view('fullcinemalist');
+        //
     }
 
     /**
@@ -62,7 +48,9 @@ class KlaipedaA1Controller extends Controller
      */
     public function show($id)
     {
-        //
+        $sale=Sales::find($id);
+        $vietos=$sale->vietos;
+        return view('FilmoSale',compact('vietos'));
     }
 
     /**

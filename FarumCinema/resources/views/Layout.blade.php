@@ -20,17 +20,14 @@
     <div class="sidebar">
         <p class="meniuIcon">≡ Menu</p>
 
-        <button class="sideButton" onclick="window.location='{{ url('visosfilmosales') }}'">Visos filmų salės</button>
+        <button class="sideButton" onclick="window.location='{{ url('Miestai') }}'">Miestai</button>
         <button class="sideButton" onclick="location.href='{{ url('confirmation') }}'">Laisvos filmų salės</button>
         <button class="sideButton" onclick="location.href='{{ url('login') }}'">Login</button>
 
     </div>
     <div class="mainBody">
-        @yield('mainas')
-        @if (Route::current()->getName() == 'klpA1')
-            @yield('klpA1')
-        @endif
-
+    @yield('mainas')
+  @yield('filmosale') 
         @if (Route::current()->getName() == 'confirm')
             @yield('confirmation')
         @endif

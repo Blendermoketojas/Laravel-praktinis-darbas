@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('pastatas', function (Blueprint $table) {
             $table->id();
             $table->string('miestas');
+            $table->string('foto_link');
             $table->timestamps();
         });
     }

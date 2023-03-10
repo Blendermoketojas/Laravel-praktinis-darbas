@@ -1,6 +1,5 @@
-@extends('Layout')
-
-@section('filmosale')
+@extends('filmosale')
+@section('admin')
 
 <div class="cinemaBorder">
     <?php

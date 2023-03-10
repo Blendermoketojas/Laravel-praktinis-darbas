@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('pastatas_id')->unsigned()->nullable();
             $table->string('Pavadinimas');
+            $table->string('foto_link');
             $table->timestamps();
         });
     }

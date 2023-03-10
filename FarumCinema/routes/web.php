@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\FormRendered;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\KlaipedaA1Controller;
-
+use App\Http\Controllers\PastatasController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\VietosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,16 +17,11 @@ use App\Http\Controllers\KlaipedaA1Controller;
 |
 */
 
-Route::get('/', function () {
-    return view('fullcinemalist');
-});
 
-Route::resource('/filmosale', KlaipedaA1Controller::class)->name('index', 'klpA1');
+Route::redirect('/','/Miestai');
 
 
-Route::get('/visosfilmosales', function () {
-    return view('fullcinemalist');
-})->name('visosfilmosales');
+Route::resource('/filmosales',SalesController::class);
 
 Route::post('/confirmation', function () {
     return view('Confirmation');
@@ -34,8 +31,13 @@ Route::get('/login', function () {
     return view('Login');
 })->name('login');
 
-Route::post('/visosfilmosales', [KlaipedaA1Controller::class, 'store'])->name('klpA1.store');
 
-Route::get('/Miestai', function () {
-    return view('Miestai');
-})->name('miestai');
+
+Route::resource('/Miestai',PastatasController::class)->name('index','miestai');
+
+Route::resource('/filmosale',VietosController::class)->name('index','filmosale');
+Route::post('user',[UserAuthController::class,'login']);
+Route::get('/filmoSaleAdmin',function(){
+return view('filmoSaleAdmin');
+
+})->name('filmosaleadmin');
