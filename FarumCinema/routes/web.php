@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FormRendered;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PastatasController;
@@ -23,9 +24,9 @@ Route::redirect('/','/Miestai');
 
 Route::resource('/filmosales',SalesController::class);
 
-Route::post('/confirmation', function () {
+Route::GET('/Confirmation', function () {
     return view('Confirmation');
-})->name('confirm');
+})->name('Confirmation');
 
 Route::get('/login', function () {
     return view('Login');
@@ -35,9 +36,22 @@ Route::get('/login', function () {
 
 Route::resource('/Miestai',PastatasController::class)->name('index','miestai');
 
-Route::resource('/filmosale',VietosController::class)->name('index','filmosale');
-Route::post('user',[UserAuthController::class,'login']);
-Route::get('/filmoSaleAdmin',function(){
-return view('filmoSaleAdmin');
+ Route::resource('/filmosale',VietosController::class)->name('index','filmosale');
 
-})->name('filmosaleadmin');
+
+ Route::post('/Miestai',[AdminController::class,'login'])->name('login');
+ Route::get('/Miestai', [PastatasController::class, 'index'])->name('miestai');
+
+Route::get('/AdminRemoval',function(){
+return view('AdminRemoval');
+})->name('AdminRemoval');
+
+ Route::post('/Miestai', [VietosController::class, 'reserveSeat'])->name('vietos.reserveSeat');
+
+Route::get('/admin', [AdminController::class, 'index'])->middleware('admin');
+
+Route::get('/destroySession', function () {
+    session()->flush();
+    return view('Miestai');
+})->name('logout');
+

@@ -3,26 +3,49 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Sales;
-use App\Models\Vietos;
-use Illuminate\Support\Facades\DB;
-use App\Models\Pastatas;
-use App\Models\User;
+use App\Models\user;
 
-class VietosController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-    
-        $vietos=Vietos::all();
-        return view('FilmoSale',compact('vietos'));
+        $users=User::all();
+        return view('Login',compact('users'));
     }
 
+    function login(Request $req){
+        $data = $req->input();
+    
+        $user = User::where('name', $data['username'])->firstOrFail();
+        $isAdmin = $user->is_admin;
+            
+        $req->session()->put('user', [
+            'name' => $data['username'],
+            'is_admin' => $isAdmin
+        ]);
+            
+          function login(Request $req){
+        $data = $req->input();
+    
+        $user = User::where('name', $data['username'])->firstOrFail();
+        $isAdmin = $user->is_admin;
+            
+        $req->session()->put('user', [
+            'name' => $data['username'],
+            'is_admin' => $isAdmin
+        ]);
+            
+        return view('miestai', [
+            'user' => session('user')
+        ]);
+        return redirect('/filmosales');
+     }
+     }
     /**
      * Show the form for creating a new resource.
      *
@@ -50,14 +73,10 @@ class VietosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, Request $request)
-{
-    $sale=Sales::find($id);
-    $vietos=$sale->vietos;
-    $is_admin=session()->get('user')['is_admin'];
-    $cinemaId = $sale->id; // assuming the Sale model has an 'id' property
-    return view('FilmoSale',compact('vietos','is_admin', 'cinemaId'));
-}
+    public function show($id)
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -91,20 +110,5 @@ class VietosController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function reserveSeat(Request $request, $cinemaId)
-    {
-        // Check if the reserveButton has been pressed
-        if ($request->has('reserveButton')) {
-            // Get the selected seat ID
-            $selectedId = $request->input('selectedId');
-    
-            // Update the reserved column of the corresponding row in the seats table
-            DB::table('vietos')
-                ->where('id', $selectedId)
-                ->update(['uzimta' => 1]);
-        
-        }
-         return redirect('/filmosale/'.$cinemaId);
     }
 }

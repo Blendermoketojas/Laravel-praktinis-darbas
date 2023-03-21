@@ -8,7 +8,8 @@ class UserAuthController extends Controller
 {
     function login(Request $req){
        $data=$req->input();
-       $req->session()->put('user',$data['username']);
+       $req->session()->put('user',$data['username'], $data['isAdmin']);
+       
        return session('user');
     }
 }

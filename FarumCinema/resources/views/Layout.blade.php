@@ -21,14 +21,19 @@
         <p class="meniuIcon">≡ Menu</p>
 
         <button class="sideButton" onclick="window.location='{{ url('Miestai') }}'">Miestai</button>
+        
         <button class="sideButton" onclick="location.href='{{ url('confirmation') }}'">Laisvos filmų salės</button>
-        <button class="sideButton" onclick="location.href='{{ url('login') }}'">Login</button>
-
+        @if(session()->has('user') && session('user')['is_admin'])
+            <button class="sideButton" onclick="location.href='{{ url('/destroySession') }}'">Logout</button>
+        @else
+        <button class="sideButton" onclick="location.href='{{ url('/login') }}'">Login</button>
+        @endif
     </div>
     <div class="mainBody">
     @yield('mainas')
   @yield('filmosale') 
-        @if (Route::current()->getName() == 'confirm')
+  @yield('AdminRemoval')
+        @if (Route::current()->getName() == 'Confirmation')
             @yield('confirmation')
         @endif
         @if (Route::current()->getName() == 'login')
