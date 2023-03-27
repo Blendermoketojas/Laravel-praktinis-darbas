@@ -10,6 +10,7 @@ class UserAuthController extends Controller
        $data=$req->input();
        $req->session()->put('user',$data['username'], $data['isAdmin']);
        
-       return session('user');
+       return response()->view('login');
+       //return session('user');
     }
 }

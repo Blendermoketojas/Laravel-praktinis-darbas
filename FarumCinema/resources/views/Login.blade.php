@@ -1,7 +1,7 @@
 @extends('layout')
 @section('login')
 <div class="anketa">
-    <form class="anketaForm" method="GET" action='{{ route('login') }}' >
+    <form class="anketaForm" method="POST" action='{{ route('login') }}' >
       @csrf
         <div class="innerAnketa">
             <h1 class="confirmText">Login</h1>

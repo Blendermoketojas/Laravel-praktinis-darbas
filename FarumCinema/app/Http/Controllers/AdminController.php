@@ -17,17 +17,6 @@ class AdminController extends Controller
         $users=User::all();
         return view('Login',compact('users'));
     }
-
-    function login(Request $req){
-        $data = $req->input();
-    
-        $user = User::where('name', $data['username'])->firstOrFail();
-        $isAdmin = $user->is_admin;
-            
-        $req->session()->put('user', [
-            'name' => $data['username'],
-            'is_admin' => $isAdmin
-        ]);
             
           function login(Request $req){
         $data = $req->input();
@@ -45,7 +34,7 @@ class AdminController extends Controller
         ]);
         return redirect('/filmosales');
      }
-     }
+     
     /**
      * Show the form for creating a new resource.
      *

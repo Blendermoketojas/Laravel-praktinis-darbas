@@ -15,7 +15,7 @@
         for ($i = 0; $i < 40; $i++) {
             if ($salesId[$i] == $cinemaId) {
                 if ($booked[$i] == 1) {
-                    if(session()->has('user') && session('user')['is_admin']){
+                    if(session()->has('user')==true && session('user')['is_admin']){
                         echo "<div class='seattaken'><a class ='AdminAnchorOrderTag'  href='". route('AdminRemoval', ['selectedId'=>$i+$firstForNumber+1,'cinemaId'=>$cinemaId]). "'name='seat' id='" . $i+$firstForNumber. "' name='seat' class='taken' id='" . $i+$firstForNumber. "' >ORDER</a></div>";
                     }else{
                         echo "<div class='seattaken'><a class ='tAnchorOrderTag'  href='' name='seat' class='taken' id='" . $i+$firstForNumber. "' >ORDER</a></div>";

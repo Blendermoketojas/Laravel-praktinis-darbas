@@ -54,9 +54,9 @@ class VietosController extends Controller
 {
     $sale=Sales::find($id);
     $vietos=$sale->vietos;
-    $is_admin=session()->get('user')['is_admin'];
-    $cinemaId = $sale->id; // assuming the Sale model has an 'id' property
-    return view('FilmoSale',compact('vietos','is_admin', 'cinemaId'));
+    
+    $cinemaId = $sale->id; 
+    return view('FilmoSale',compact('vietos','cinemaId'));
 }
 
     /**
@@ -92,19 +92,20 @@ class VietosController extends Controller
     {
         //
     }
-    public function reserveSeat(Request $request, $cinemaId)
+    public function reserveSeat(Request $request)
     {
-        // Check if the reserveButton has been pressed
+        $cinemaId = $request->input('cinemaId');
         if ($request->has('reserveButton')) {
-            // Get the selected seat ID
+    
             $selectedId = $request->input('selectedId');
     
-            // Update the reserved column of the corresponding row in the seats table
+      
             DB::table('vietos')
                 ->where('id', $selectedId)
                 ->update(['uzimta' => 1]);
         
         }
-         return redirect('/filmosale/'.$cinemaId);
+
+        return redirect('/filmosale/'.$cinemaId);
     }
 }
