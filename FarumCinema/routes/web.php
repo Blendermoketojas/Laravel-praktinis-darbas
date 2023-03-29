@@ -28,7 +28,13 @@ Route::get('/Confirmation', function () {
     return view('Confirmation');
 })->name('Confirmation');
 
-// Route::resource('/Login',UserAuthController::class)->name('login','login');
+Route::get('/Login', function () {
+    return view('Login');
+})->name('auth');
+
+Route::get('/Login1',[AdminController::class, 'login'])->name('login');
+
+// Route::post('/Login/login',[AdminController::class,'login'])->name('Login');
 
 
 
@@ -37,14 +43,13 @@ Route::resource('/Miestai',PastatasController::class)->name('index','miestai');
  Route::resource('/filmosale',VietosController::class)->name('index','filmosale');
 
 
-//  Route::post('/Miestai',[AdminController::class,'login'])->name('login');
 
 
 // Route::get('/AdminRemoval',function(){
 // return view('AdminRemoval');
 // })->name('AdminRemoval');
 
- Route::post('/Mietai', [VietosController::class, 'reserveSeat'])->name('vietos.reserveSeat');
+ Route::post('/Miestai', [VietosController::class, 'reserveSeat'])->name('vietos.reserveSeat');
 
 // Route::get('/admin', [AdminController::class, 'index'])->middleware('admin');
 

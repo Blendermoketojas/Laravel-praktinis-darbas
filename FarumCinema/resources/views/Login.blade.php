@@ -9,7 +9,7 @@
             <input name="username" class="formText" type="text">
             <h3 class="formText">Slaptazodis</h3>
             <input name='userpassword' class="formText" type="password"><br><br>
-            <button class="formButt">Prisijungti</button>
+            <button type='submit' class="formButt">Prisijungti</button>
         </div>
     </form>
 </div>

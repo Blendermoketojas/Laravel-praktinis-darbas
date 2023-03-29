@@ -7,32 +7,41 @@ use App\Models\user;
 
 class AdminController extends Controller
 {
+    public function __invoke(Request $request)
+    {
+
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-        $users=User::all();
-        return view('Login',compact('users'));
+
+
     }
             
           function login(Request $req){
-        $data = $req->input();
+            $data = $req->input('username');
     
         $user = User::where('name', $data['username'])->firstOrFail();
-        $isAdmin = $user->is_admin;
-            
-        $req->session()->put('user', [
-            'name' => $data['username'],
-            'is_admin' => $isAdmin
-        ]);
-            
-        return view('miestai', [
-            'user' => session('user')
-        ]);
-        return redirect('/filmosales');
+       
+            if($user){
+                $isAdmin = $user->is_admin;
+                if($data['password']==$user->password){
+                    $req->session()->put('user', [
+                        'name' => $data['username'],
+                        'is_admin' => $isAdmin
+                    ]);
+                    return view('miestai', [
+                        'user' => session('user')
+                    ]);
+                }
+            }
+            $error="Prisijungimas nepavyko";
+        return view('Login',compact('error'));
+
      }
      
     /**

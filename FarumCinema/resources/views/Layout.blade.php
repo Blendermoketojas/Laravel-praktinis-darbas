@@ -26,7 +26,7 @@
         @if(session()->has('user') && session('user')['is_admin'])
             <button class="sideButton" onclick="location.href='{{ url('/destroySession') }}'">Logout</button>
         @else
-        <button class="sideButton" onclick="location.href='{{ url('/login') }}'">Login</button>
+        <button class="sideButton" onclick="location.href='{{ url('/Login') }}'">Login</button>
         @endif
     </div>
     <div class="mainBody">
