@@ -1,5 +1,5 @@
 @extends('Layout')
-@section('cities')
+@section('citiesDel')
     <div class="mainas">
         <p class="moviePlaces"> Miestai:</p>
         <?php
@@ -10,18 +10,15 @@
         }
         for ($i=0; $i < sizeOf($arrayCity); $i++) { 
             if(session()->has('user')==true && session('user')['is_admin']){
-           echo '<a href="'.route('filmosales.show', ['filmosale'=>$arrayid[$i]]).'" class="selectionName">'.$arrayCity[$i].'<br>';
+           echo '<a href="'.route('MiestaiDelConf', ['filmosale'=>$arrayid[$i]]).'" class="selectionName">'.$arrayCity[$i].'<br>';
            echo '<img class="buttonPic" src="'.$arrayLink[$i].'"></a>';
             }else{
-                echo '<a href="'.route('filmosales.show', ['filmosale'=>$arrayid[$i]]).'" class="selectionName">'.$arrayCity[$i].'<br>';
+                echo '<a href="'.route('MiestaiDelConf', ['filmosale'=>$arrayid[$i]]).'" class="selectionName">'.$arrayCity[$i].'<br>';
            echo '<img class="buttonPic" src="'.$arrayLink[$i].'"></a>';
             }
         }
-        if(session()->has('user')==true && session('user')['is_admin']){
-  echo  "<a class ='cityAdd'  name='seat' href='". route('MiestaiAdd')."'  >Pridėkite miestą</a>";
 
 
-}
 
    
                 ?>

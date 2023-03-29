@@ -45,6 +45,21 @@ class PastatasController extends Controller
         }
     }
     }
+    function cityDelfunc(Request $req){
+        $pastatai=Pastatas::all();
+        if ($req->has('confirm')) {
+            $cinemaId = $req->input('cinemaId');
+            DB::table('pastatas')
+            ->where('id', $cinemaId)
+            ->delete();
+        return view('Miestai',compact('pastatai'));
+    }else{
+        if($req->has("notConfirm")){
+        return view('Miestai',compact('pastatai'));
+        }
+    }
+}
+    
     /**
      * Store a newly created resource in storage.
      *

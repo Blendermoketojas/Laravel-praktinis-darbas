@@ -21,20 +21,24 @@
         <p class="meniuIcon">≡ Menu</p>
 
         <button class="sideButton" onclick="window.location='{{ url('Miestai') }}'">Miestai</button>
-        
-        <button class="sideButton" onclick="location.href='{{ url('confirmation') }}'">Laisvos filmų salės</button>
-        @if(session()->has('user') && session('user')['is_admin'])
+        @if (session()->has('user') && session('user')['is_admin'])
+            <button class="sideButton" onclick="location.href='{{ url('/MiestaiDel') }}'">Miestų ištrinimas</button>
+        @endif
+        @if (session()->has('user') && session('user')['is_admin'])
             <button class="sideButton" onclick="location.href='{{ url('/destroySession') }}'">Logout</button>
         @else
-        <button class="sideButton" onclick="location.href='{{ url('/Login') }}'">Login</button>
+            <button class="sideButton" onclick="location.href='{{ url('/Login') }}'">Login</button>
         @endif
     </div>
     <div class="mainBody">
-    @yield('mainas')
-  @yield('filmosale') 
-  @yield('AdminRemoval')
-  @yield('login')
-  @yield('MiestaiAdd')
+     
+        @yield('citiesDel')
+        @yield('mainas')
+        @yield('filmosale')
+        @yield('AdminRemoval')
+        @yield('login')
+        @yield('MiestaiAdd')
+        @yield('citiesDelConf')
         @if (Route::current()->getName() == 'Confirmation')
             @yield('confirmation')
         @endif
@@ -48,8 +52,12 @@
             @yield('cities')
         @endif
         @if (Route::current()->getName() == 'ConfAdd')
-        @yield('cities')
-    @endif
+            @yield('cities')
+        @endif
+        @if (Route::current()->getName() == 'CityDelConf')
+            @yield('cities')
+        @endif
+   
     </div>
 </body>
 

@@ -54,5 +54,17 @@ Route::get('/MiestaiAdd', function () {
     return view('MiestaiAdd');
 })->name('MiestaiAdd')->middleware('admin');
 
+Route::get('/MiestaiDel', function () {
+    $pastatai=Pastatas::all();
+    return view('MiestaiDel',compact('pastatai'));
+})->name('MiestaiDel')->middleware('admin');
+
+Route::get('/MiestaiDelConf', function () {
+    return view('MiestaiDelConf');
+})->name('MiestaiDelConf')->middleware('admin');
+
+
+
 Route::post('/ConfAdd', [PastatasController::class, 'cityAddfunc'])->name('ConfAdd')->middleware('admin');
 
+Route::post('/CityDelConf', [PastatasController::class, 'cityDelfunc'])->name('CityDelConf')->middleware('admin');
