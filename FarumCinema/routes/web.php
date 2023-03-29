@@ -7,6 +7,8 @@ use App\Http\Controllers\PastatasController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\VietosController;
+use App\Models\Pastatas;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,29 +34,25 @@ Route::get('/Login', function () {
     return view('Login');
 })->name('auth');
 
-Route::get('/Login1',[AdminController::class, 'login'])->name('login');
-
-// Route::post('/Login/login',[AdminController::class,'login'])->name('Login');
-
-
+Route::post('/Login1',[AdminController::class, 'login'])->name('login');
 
 Route::resource('/Miestai',PastatasController::class)->name('index','miestai');
 
  Route::resource('/filmosale',VietosController::class)->name('index','filmosale');
 
-
-
-
-// Route::get('/AdminRemoval',function(){
-// return view('AdminRemoval');
-// })->name('AdminRemoval');
-
  Route::post('/Miestai', [VietosController::class, 'reserveSeat'])->name('vietos.reserveSeat');
+ Route::get('/AdminRemoval', function () {
+    return view('AdminRemoval');
+})->name('AdminRemoval')->middleware('admin');
 
-// Route::get('/admin', [AdminController::class, 'index'])->middleware('admin');
+Route::post('/AdminRemoval1', [AdminController::class, 'update'])->middleware('admin')->name('AdminRemoval1');
 
-Route::get('/destroySession', function () {
-    session()->flush();
-    return view('Miestai');
-})->name('logout');
+
+Route::get('/destroySession', [AdminController::class, 'logout'])->name('logout');
+
+Route::get('/MiestaiAdd', function () {
+    return view('MiestaiAdd');
+})->name('MiestaiAdd')->middleware('admin');
+
+Route::post('/ConfAdd', [PastatasController::class, 'cityAddfunc'])->name('ConfAdd')->middleware('admin');
 

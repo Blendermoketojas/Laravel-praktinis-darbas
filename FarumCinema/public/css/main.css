@@ -247,3 +247,25 @@ a:hover {
   background-color: #000000;
   
 }
+.cityAdd{
+   
+    display: inline-block;
+    
+    padding: 10px 20px;
+       border: 2px solid #ccc;
+       background-color: #fff;
+       color: #7e7c7c;
+       text-decoration: none;
+       text-align: center;
+       font-weight: bold;
+       border-radius: 4px;
+       cursor: pointer;
+       background-color: #274156;
+       height: 300px;
+   width: 33%;
+   margin-left: 14%;
+   margin-bottom: 150px;
+   font-size: 40px;
+   border-radius: 10px;
+      
+}

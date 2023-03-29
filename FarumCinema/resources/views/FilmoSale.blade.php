@@ -12,7 +12,7 @@
         $cinemaId = request()->route('filmosale');
         $firstForNumber = $cinemaId * 40 - sizeOf($arrayId);
         
-        for ($i = 0; $i < 40; $i++) {
+        for ($i = 0; $i < sizeof($arrayId); $i++) {
             if ($salesId[$i] == $cinemaId) {
                 if ($booked[$i] == 1) {
                     if(session()->has('user')==true && session('user')['is_admin']){
@@ -26,6 +26,7 @@
             } else {
                 continue;
             }
+            
         }
         
         ?>

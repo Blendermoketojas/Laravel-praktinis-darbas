@@ -33,15 +33,23 @@
     @yield('mainas')
   @yield('filmosale') 
   @yield('AdminRemoval')
+  @yield('login')
+  @yield('MiestaiAdd')
         @if (Route::current()->getName() == 'Confirmation')
             @yield('confirmation')
         @endif
         @if (Route::current()->getName() == 'login')
-            @yield('login')
+            @yield('cities')
         @endif
         @if (Route::current()->getName() == 'miestai')
             @yield('cities')
         @endif
+        @if (Route::current()->getName() == 'logout')
+            @yield('cities')
+        @endif
+        @if (Route::current()->getName() == 'ConfAdd')
+        @yield('cities')
+    @endif
     </div>
 </body>
 

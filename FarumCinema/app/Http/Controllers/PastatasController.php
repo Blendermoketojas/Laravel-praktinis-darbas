@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pastatas;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PastatasController extends Controller
 {
@@ -23,11 +25,26 @@ class PastatasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+      
     }
-
+    function cityAddfunc(Request $req){
+        $pastatai=Pastatas::all();
+        if ($req->has('addCity')) {
+        $city = $req->input('pav');
+        $foto = $req->input('fotoLink');
+        DB::table('pastatas')->insert([
+            'miestas' => $city,
+            'foto_link' => $foto,
+        ]);
+        return view('Miestai',compact('pastatai'));
+    }else{
+        if($req->has("cancel")){
+        return view('Miestai',compact('pastatai'));
+        }
+    }
+    }
     /**
      * Store a newly created resource in storage.
      *

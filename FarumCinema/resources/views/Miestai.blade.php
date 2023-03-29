@@ -13,8 +13,13 @@
            echo '<a href="'.route('filmosales.show', ['filmosale'=>$arrayid[$i]]).'" class="selectionName">'.$arrayCity[$i].'<br>';
            echo '<img class="buttonPic" src="'.$arrayLink[$i].'"></a>';
            
-            
         }
+        if(session()->has('user')==true && session('user')['is_admin']){
+  echo  "<a class ='cityAdd'  name='seat' href='". route('MiestaiAdd')."'  >Pridėkite miestą</a>";
+
+
+}
+
    
                 ?>
          

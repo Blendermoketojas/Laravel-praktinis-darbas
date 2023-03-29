@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\user;
+use Illuminate\Support\Facades\DB;
+use App\Models\Pastatas;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -24,26 +27,34 @@ class AdminController extends Controller
             
           function login(Request $req){
             $data = $req->input('username');
-    
-        $user = User::where('name', $data['username'])->firstOrFail();
+            $pass = $req->input('userpassword');
+        $user = User::where('name', $data)->firstOrFail();
        
             if($user){
+                
                 $isAdmin = $user->is_admin;
-                if($data['password']==$user->password){
+         $credentials = ['name'=> $data, 'password'=>$pass];
+                if($pass==$user->password){
+                    $pastatai=Pastatas::all();
                     $req->session()->put('user', [
-                        'name' => $data['username'],
+                        'name' => $data,
                         'is_admin' => $isAdmin
                     ]);
-                    return view('miestai', [
+                    return view('Miestai', [
                         'user' => session('user')
-                    ]);
+                    ],compact('pastatai'));
+                }else{
+                    $error="Prisijungimas nepavyko";
+                    return view('Login',compact('error'));
                 }
             }
-            $error="Prisijungimas nepavyko";
-        return view('Login',compact('error'));
-
      }
      
+     function logout(Request $req){
+        session()->flush();
+        $pastatai=Pastatas::all();
+        return view('Miestai',compact('pastatai'));
+     }
     /**
      * Show the form for creating a new resource.
      *
@@ -94,9 +105,22 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $cinemaId = $request->input('cinemaId');
+        if ($request->has('Taip')) {
+    
+            $selectedId = $request->input('selectedId');
+    
+      
+            DB::table('vietos')
+                ->where('id', $selectedId)
+                ->update(['uzimta' => 0]);
+                return redirect('/filmosale/'.$cinemaId);
+        }else{
+            return redirect('/filmosale/'.$cinemaId);
+        }
+
     }
 
     /**
