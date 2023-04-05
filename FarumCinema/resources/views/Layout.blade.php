@@ -18,13 +18,14 @@
     </div>
 
     <div class="sidebar">
+        <div class="d-flex justify-content-end align-items-center">
         <p class="meniuIcon">≡ Menu</p>
-
+        </div>
         <button class="sideButton" onclick="window.location='{{ url('Miestai') }}'">Miestai</button>
         @if (session()->has('user') && session('user')['is_admin'])
             <button class="sideButton" onclick="location.href='{{ url('/MiestaiDel') }}'">Miestų ištrinimas</button>
         @endif
-        @if (session()->has('user') && session('user')['is_admin'])
+        @if (session()->has('user'))
             <button class="sideButton" onclick="location.href='{{ url('/destroySession') }}'">Logout</button>
         @else
             <button class="sideButton" onclick="location.href='{{ url('/Login') }}'">Login</button>

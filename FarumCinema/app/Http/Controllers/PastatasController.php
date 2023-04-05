@@ -16,7 +16,7 @@ class PastatasController extends Controller
      */
     public function index()
     {
-        $pastatai=Pastatas::all();
+        $pastatai=Pastatas::all()->sortBy('id');
      return view('Miestai',compact('pastatai'));
     }
 
