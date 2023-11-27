@@ -34,6 +34,7 @@ class AdminController extends Controller
                 
                 $isAdmin = $user->is_admin;
          $credentials = ['name'=> $data, 'password'=>$pass];
+         
                 if($pass==$user->password){
                     $pastatai=Pastatas::all();
                     $req->session()->put('user', [

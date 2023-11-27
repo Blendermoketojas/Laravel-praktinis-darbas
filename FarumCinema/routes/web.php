@@ -21,10 +21,10 @@ use App\Models\Pastatas;
 */
 
 
-Route::redirect('/','/Miestai');
+Route::redirect('/', '/Login');
 
 
-Route::resource('/filmosales',SalesController::class);
+Route::resource('/filmosales', SalesController::class);
 
 Route::get('/Confirmation', function () {
     return view('Confirmation');
@@ -34,14 +34,15 @@ Route::get('/Login', function () {
     return view('Login');
 })->name('auth');
 
-Route::post('/Login1',[AdminController::class, 'login'])->name('login');
+Route::post('/Login1', [AdminController::class, 'login'])->name('login');
 
-Route::resource('/Miestai',PastatasController::class)->name('index','miestai');
+Route::resource('/Miestai', PastatasController::class)->name('index', 'miestai');
 
- Route::resource('/filmosale',VietosController::class)->name('index','filmosale');
+Route::resource('/filmosale', VietosController::class)->name('index', 'filmosale');
 
- Route::post('/Miestai', [VietosController::class, 'reserveSeat'])->name('vietos.reserveSeat');
- Route::get('/AdminRemoval', function () {
+Route::post('/Miestai', [VietosController::class, 'reserveSeat'])->name('vietos.reserveSeat');
+
+Route::get('/AdminRemoval', function () {
     return view('AdminRemoval');
 })->name('AdminRemoval')->middleware('admin');
 
@@ -55,8 +56,8 @@ Route::get('/MiestaiAdd', function () {
 })->name('MiestaiAdd')->middleware('admin');
 
 Route::get('/MiestaiDel', function () {
-    $pastatai=Pastatas::all();
-    return view('MiestaiDel',compact('pastatai'));
+    $pastatai = Pastatas::all();
+    return view('MiestaiDel', compact('pastatai'));
 })->name('MiestaiDel')->middleware('admin');
 
 Route::get('/MiestaiDelConf', function () {
